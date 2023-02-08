@@ -1,0 +1,27 @@
+스프링에서는 유조의 요청을 받는 DispatcherServlet이 핵심이다. FrontController의 역할을 맡는다.
+
+DispatcherServlet - 공통적인 부분을 처리하고 Controller로 응답.
+- 컴포넌트는 Spring에서의 객체라고 보면 된다.
+-  SpringBean : Spring에 등록된 Beans
+- 컴포넌트 스캔을 한다.(Spring bean을 자동으로 탐색하는 키워드)
+
+   컴포넌트 스캔을 하면 com.itbank. 아래의 모든 클래스(@Controller, @Service, 등..어노테이션이 달린것)를 스캔해서
+   IoC 컨테이너에 담는것이다.
+
+@controller는 해당 주소로 forward시켜준다.
+
+어노테이션 @Controller -> controller 클래스를 선언
+@Controller에 정의된 메서드가 리턴하는 String을 페이지명으로 응답한다.(forward)
+@RestController는 데이터로 응답
+
+
+Front Controller란, 우선적으로 클라이언트의 모든 요청을 받고 그 요청을 분석하여 세부 컨트롤러 들에게 필요한 작업을
+나눠 주게된다.
+
+filter
+filter라는 객체에서 인코딩설정을 해주면 모든 주소에서의 요청이 오면 모든 서블릿의 
+request encoding방식을 통일할 수 있다.
+
+
+model : request의 Attribute를 사용할 수 있는 객체
+// 매개변수 num1,num2 : 전달되는 파라미터 명과 일치하면 해당 변수에 저장된다.

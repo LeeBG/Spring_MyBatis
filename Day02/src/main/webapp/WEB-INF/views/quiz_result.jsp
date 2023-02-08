@@ -10,6 +10,6 @@
 	<h1>Quiz 결과</h1>
 	<hr/>
 	
-	<h3>num1 + num2 = ${num1 + num2 }</h3>
+	<h3>${num1} + ${num2} = ${result }</h3>
 </body>
 </html>

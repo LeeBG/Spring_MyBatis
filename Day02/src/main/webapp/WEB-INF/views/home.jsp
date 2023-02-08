@@ -12,9 +12,13 @@
 		Hello world!  
 	</h1>
 	
-	<P>  The time on the server is ${serverTime}. </P>
-	<P>  테스트 : ${test }</P>
+	<p>  The time on the server is ${serverTime}. </p>
+	<p>  테스트 : ${test }</p>
 	
-	<a href="ex01"><button>ex01</button></a>
+	<ul>
+		<li><a href="ex01"><button>ex01</button></a></li>
+		<li><a href="quiz"><button>quiz</button></a></li>
+	</ul>
+	
 </body>
 </html>

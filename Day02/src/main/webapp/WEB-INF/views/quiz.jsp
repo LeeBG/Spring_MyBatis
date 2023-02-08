@@ -5,11 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>quiz </title>
+<style>
+	fieldset {
+		display: inline-block;
+	}
+</style>
 </head>
+
 <body>
 	<h1>quiz - controller</h1>
 	<hr/>
-	
 	<%--
 		quizController.java 	/quiz로 들어오는 요청을 처리하는 컨트롤러
 								GET으로 요청 시 quiz.jsp로 포워드
@@ -22,7 +27,8 @@
 	 --%>
 	 
 	 <fieldset>
-	 	<legend>폼</legend>
+	 	<legend>입력 폼</legend>
+	 	<%-- action이 빠지면 자기자신 주소으로 받는다. --%>
 		 <form method="POST">
 		 	<p><input name="num1" type="number" placeholder="숫자1 입력" required/></p>
 		 	<p><input name="num2" type="number" placeholder="숫자2 입력" required/></p>
