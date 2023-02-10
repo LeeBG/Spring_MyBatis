@@ -291,6 +291,11 @@ grant connect,resource,dba to c##[account];
 		</init-param>
 	</filter>
 
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 ```
 
 
