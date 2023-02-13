@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	https://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<!-- 접속(connection)을 생성하고 보관할 Pool 객체를 스프링 빈으로 등록 -->
+	<bean id="ds" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl"
+			value="jdbc:oracle:thin:@192.168.1.100:1521:xe" />
+		<property name="user" value="c##itbank" />
+		<property name="password" value="it" />
+	</bean>
+
+	<!-- Spring에서 DB를 사용할 툴(template)을 생성 -->
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<!-- template는 DataSource가 있어야 동작할 수 있다. (의존성 주입==DI) -->
+		<property name="dataSource" ref="ds" />
+	</bean>
+	
+	<context:component-scan base-package="com.itbank.*" />
+</beans>
+
+
