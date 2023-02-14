@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 https://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/context
+	 https://www.springframework.org/schema/context/spring-context.xsd
+	 http://mybatis.org/schema/mybatis-spring http://www.mybatis.org/schema/mybatis-spring-1.2.xsd">
+
+	<context:component-scan base-package="com.itbank.service"/>
+	<mybatis-spring:scan base-package="com.itbank.model"/>
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 1. DB 접속에 사용되는 설정을 스크림 빈으로 등록 -->
+	<bean id="hc" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl"
+			value="jdbc:oracle:thin:@192.168.1.100:1521:xe" />
+		<property name="username" value="c##itbank" />
+		<property name="password" value="it" />
+	</bean>
+	
+	<!--  2. hc가지고 Connection을 보관하고 있는 dataSource 객체를 만든다 -->
+	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+		<!-- 생성자로 의존성( = hc)을 주입 -->
+		<constructor-arg ref="hc"/>
+	</bean>
+	
+	<!-- 3. ds를 주입하여 MyBatis 객체를 만든다 -->
+	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds" />
+	</bean>
+	
+	<!-- 4. ssf를 주입해서 sql 구문으로 실행할 Sql Template를 생성 -->
+	<!-- 기본생성자가 없기 때문에 arg에 ssf를 추가해서 생성 -->
+	<bean id="sst" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="close">
+		<constructor-arg ref="ssf"/>
+	</bean>
+	
+</beans>
