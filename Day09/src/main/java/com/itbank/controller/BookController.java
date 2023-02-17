@@ -30,13 +30,11 @@ public class BookController {
 		return "redirect:/";
 	}
 	
-	// 경로가 달라져도 반응하려면 {변수명}을 작성하면 된다.
-	// 저 경로의 값을 Java메서드의 변수로 사용하려면 @PathVariable 어노테이션을 사용
 	@GetMapping("/delete/{idx}")
-	public String deleteBook(@PathVariable int idx) { // 파라미터를 받을 때에는 데이터형과 컬럼명을 같게하면 된다
+	public String deleteBook(@PathVariable int idx) { //
 		int row = bs.deleteBook(idx);
 		if(row != 1) {
-			System.out.println("삭제 실패!!");
+			System.out.println("!!");
 		}
 		return "redirect:/";	
 	}
@@ -57,7 +55,7 @@ public class BookController {
 		int row = bs.update(dto);
 		
 		if(row != 1) {
-			System.out.println("수정 실패");
+			System.out.println("");
 		}
 		return "redirect:/";
 	}

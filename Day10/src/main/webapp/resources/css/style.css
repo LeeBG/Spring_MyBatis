@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+body {
+	text-align:center;
+}
+
+table {
+	display : inline-block;
+	border-collapse: collapse;
+	text-align: right;
+	
+}
+
+th, td {
+	border: 1px solid black;
+	padding : 5px 10px;
+}
+
+fieldset {
+	display: inline-block;
+}
+
+tr {
+	width: 100%	
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;	
+}

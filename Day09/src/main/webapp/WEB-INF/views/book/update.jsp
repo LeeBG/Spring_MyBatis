@@ -10,7 +10,7 @@
 	<p>출판일 : <input name="publish_date" type="date" placeholder="출판일"  value="${row.publish_date }" required></p>
 	<p><input name="price" type=number placeholder="가격" value="${row.price }" required></p>
 	
-	<button>수정</button>
+	<button>수정 완료</button>
 </form>
 
 </body>
