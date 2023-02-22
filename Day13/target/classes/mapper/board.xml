@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	마이바티스와 매퍼 주자동 주입은 
+	1. @어노테이션을 활용한 방식과
+	2. 외부 mapper파일을 이용한 방식
+	
+	
+	namespace 	: 사용할 DAO를 지정. 패키지를 모두 작성해야 한다.
+	id 			: 사용할 DAO의 메서드 명	
+ -->
+
+<mapper namespace="com.itbank.model.BoardDAO">
+	<select id="selectAll"
+	 parameterType="hashmap"
+	 resultType="com.itbank.model.BoardDTO">
+	 	
+		select * from board
+		<if test="search != null and type != null">
+	 		where ${type} like '%${search}%'
+	 	</if> 
+			order by idx desc 
+			offset #{offset} rows 
+			fetch first #{perCount} row only
+	</select>
+	
+	<select id="boardCount"
+			parameterType="hashmap"
+			resultType="int">
+			
+		select count(*) from board
+		<if test="search != null or type != null">
+			where ${type} like '%${search}%'
+		</if>
+	</select>
+	
+	<insert id="addboard"
+			parameterType="com.itbank.model.BoardDTO">
+			insert into 
+			board(title,contents,writer) 
+			values(#{title},#{contents},#{writer})
+	</insert>
+	
+	<update id="updateView"
+			parameterType="int">
+		update board set view_count=view_count+1 
+		where idx = #{idx}
+	</update>
+	
+	<update id="update"
+			parameterType="com.itbank.model.BoardDTO">
+		update board set title=#{title}, contents=#{contents}, writer=#{writer} 
+		where idx = #{idx}
+	</update>
+</mapper>
