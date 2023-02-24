@@ -1,0 +1,19 @@
+@charset "UTF-8";
+ul {
+	display: flex;
+	list-style: none;
+	padding: 0;
+}
+
+ul li {
+	margin: 0 10px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 5px 10px;
+}
