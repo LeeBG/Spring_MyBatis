@@ -35,7 +35,6 @@
 			where userid=#{userid}
 				and username=#{username}
 				and email=#{email}
-		
 	</update>
 	
 	<delete id="delete"

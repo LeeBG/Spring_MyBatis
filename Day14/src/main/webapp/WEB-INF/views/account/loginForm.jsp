@@ -7,6 +7,6 @@
 		<p><input name="userpw" placeholder="pw입력" required></p>
 		<button>로그인</button>
 	</form>
-
+	<p><button onclick="javascript:history.go(-1)">이전 페이지</button></p>
 </body>
 </html>

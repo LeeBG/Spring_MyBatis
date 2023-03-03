@@ -73,6 +73,8 @@ public class BoardController {
 	public ModelAndView search(@RequestParam Map<String,Object> map) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",boardService.getBoards(map));
-		mav.setViewName(${cpath}+"/board/search");
+		mav.setViewName("home");
+		
+		return mav;
 	}
 }

@@ -29,6 +29,11 @@ public interface BoardDAO {
 	
 	@Update("update board set view_count=view_count+1 where idx= #{idx}")
 	int updateView(int idx);
+	
+	@Select("select * from board " + 
+			"where ${type} like '%${search}%' " + 
+			"order by idx desc")
+	List<BoardDTO> selectSearch(Map<String, Object> map);
 
 	
 }

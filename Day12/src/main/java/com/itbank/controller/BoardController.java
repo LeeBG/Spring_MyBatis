@@ -2,6 +2,8 @@ package com.itbank.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,17 +65,18 @@ public class BoardController {
 	}
 	
 	@GetMapping("/delete/{idx}")
-	public String delete(@PathVariable int idx) {
+	public String delete(@PathVariable int idx,HttpServletRequest request) {
 		int row = boardService.delete(idx);
 		System.out.println(row != 1 ? "실패" : "성공");
-		return "redirect:/";
+		return "redirect:"+request.getHeader("Referer");
 	}
 	
 	@GetMapping("/search")
-	public ModelAndView search(@RequestParam Map<String,Object> map, Integer reqPage) {
+	public ModelAndView search(@RequestParam Map<String,Object> map) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list",boardService.getBoards(map,reqPage));
-		mav.setViewName("home");
+		
+		mav.addObject("map",boardService.getBoards(map));
+		mav.setViewName("board/search");
 		
 		return mav;
 	}

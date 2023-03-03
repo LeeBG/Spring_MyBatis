@@ -53,7 +53,7 @@
 		if (result === true) {
 			location.href = '${cpath }/account/delete/' + idx;
 		} else {
-			alert("취소되었습니다.")
+			alert("취소되었습니다.");
 			history.reload();
 		}
 	}

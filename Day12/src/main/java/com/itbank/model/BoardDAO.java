@@ -34,8 +34,10 @@ public interface BoardDAO {
 	int updateView(int idx);
 	
 	@Select("select * from board " + 
-			"where ${type} like '%${search}%' " + 
-			"order by idx desc")
+			"where title like '%${search}%'" + 
+			"order by idx desc " + 
+			"offset #{offset} rows " + 
+			"fetch first #{perCount} rows only")
 	List<BoardDTO> selectSearch(Map<String, Object> map);
 
 	@Select("select count(*) from board")

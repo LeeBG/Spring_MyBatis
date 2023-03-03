@@ -33,7 +33,7 @@ public class AccountService {
 	
 	// throws : 호출한 위치로 예외를 전가
 	// throw  : 예외를 의도적으로 발생
-	public AccountDTO login(AccountDTO user) throws NullPointerException, UnsupportedEncodingException, NoSuchAlgorithmException {
+	public AccountDTO login(AccountDTO user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		String encodedPw = hash.getHash(user.getUserpw());
 		user.setUserpw(encodedPw);
 		AccountDTO row = dao.login(user);

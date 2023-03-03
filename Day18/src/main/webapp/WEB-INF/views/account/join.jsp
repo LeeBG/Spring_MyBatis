@@ -3,6 +3,7 @@
 <%@ include file="../layout/header.jsp"%>
 <div class="container pt-3">
 	<form action="${cpath }/account/join" method="POST">
+		<h2>회원가입</h2>	
 		<div class="form-group">
 			<input type="text" name="userid" id="userid" class="form-control"
 				placeholder="Enter UserId" required />

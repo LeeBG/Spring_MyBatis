@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="layout/header.jsp" %>
-<c:set var="list" value="${map['list'] }"/>
-<c:set var="page" value="${map['page'] }"/>
+	<c:set var="list" value="${map['list'] }"/>
+	<c:set var="page" value="${map['page'] }"/>
 	<h3>Day12 - Day10, Day11 와 이어집니다!!</h3>
 	<table>
 		<tr>
@@ -71,6 +71,7 @@
 		</select>
 	
 		<input name="search" type="search">
+		<input name="reqPage" type="hidden" value="1">
 		<button>검색</button>
 	</form>
 	

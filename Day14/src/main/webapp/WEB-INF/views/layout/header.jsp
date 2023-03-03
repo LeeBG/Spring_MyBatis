@@ -10,15 +10,23 @@
 <title>${cpath }</title>
 </head>
 <body>
-	<h1>${cpath } - ${user.name }</h1>
+	<h1>${cpath } - ${user.nick }</h1>
 	
 	
 	<ul>
 		<li><a href="${cpath }">Home</a></li>
-		<li><a href="${cpath }/account/list"/>회원목록 보기</a></li>
-		<li><a href="${cpath }/account/login"/>로그인</a></li>
-		<li>로그아웃</li>
-		<li>회원가입</li>
-		<li>내정보</li>
+		
+		<li><a href="${cpath }/account/list">회원목록 보기</a></li>
+		
+		<c:choose>
+			<c:when test="${empty user }">
+				<li><a href="${cpath }/account/login">로그인</a></li>
+				<li><a href="${cpath }/account/join">회원가입</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="${cpath }/account/logout">로그아웃</a></li>
+				<li><a href="${cpath }/account/mypage">내 정보</a></li>
+			</c:otherwise>
+		</c:choose>
 	</ul>
 	<hr/>

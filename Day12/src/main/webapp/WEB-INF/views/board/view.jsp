@@ -31,7 +31,7 @@
 			<td>${list.write_date}</td>
 		</tr>
 		<tr>
-		<th><a href="${cpath }/"><button>돌아가기</button></a></th>
+		<th><a href="javascript:history.go(-1);"><button>돌아가기</button></a></th>
 		<td>
 			<a href="${cpath }/board/update/${list.idx}"><button>수정</button></a>
 			<a><button onclick="checkDelete(${list.idx})">삭제</button></a>

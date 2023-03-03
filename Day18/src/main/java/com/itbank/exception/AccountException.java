@@ -22,7 +22,7 @@ public class AccountException {
 	public ModelAndView npe(NullPointerException e) {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("msg", "로그인 실패");
+		mav.addObject("msg", "nullPoint오류");
 		mav.setViewName("account/fail");
 		return mav;
 	}

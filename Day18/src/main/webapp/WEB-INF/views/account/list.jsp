@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
+
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	
 <div class="container pt-3">
+	
+	<h2>유저 리스트</h2>
+
 	<table class="table table-dark table-striped">
 		<tr>
 			<th>idx</th>
@@ -17,7 +23,11 @@
 			<tr>
 				<td>${row.idx }</td>
 				<td>${row.userid }</td>
-				<td>${row.userpw }</td>
+				<td>
+					${fn:substring(row.userpw,0,10) }
+					<%-- fn JSTL은 EL로 사용할 수 있다. --%>
+					<%-- substring은(데이터,start,end) --%>
+				</td>
 				<td>${row.nick }</td>
 				<td>${row.email }</td>
 				<td>${row.username }</td>

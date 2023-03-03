@@ -13,4 +13,10 @@ public interface AccountDAO {
 	
 	AccountDTO login(AccountDTO user);
 	
+	int join(AccountDTO user);
+
+	int update(AccountDTO user);
+
+	int delete(int idx);
+	
 }

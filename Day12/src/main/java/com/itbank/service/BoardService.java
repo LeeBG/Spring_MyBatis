@@ -37,6 +37,25 @@ public class BoardService {
 		return result;
 	}
 	
+	public Map<String, Object> getBoards(Map<String, Object> map) {
+		
+		String rpage = (String)map.get("reqPage");
+		
+		Integer reqPage = Integer.parseInt(rpage); 
+		Paging page = new Paging(reqPage, dao.searchedBoardCount(map));
+			
+		map.put("perCount", page.getPerCount());
+		map.put("offset", page.getOffset());
+		
+		// 3. 가져온 게시글 목록과 paging 결과를 Map에다 저장한다.
+		Map<String, Object> result = new HashMap<String, Object>();
+			
+		result.put("list", dao.selectSearch(map));
+		result.put("page", page);
+		
+		return result;
+	}
+	
 	public BoardDTO selectOne(int idx) {
 		return dao.selectOne(idx);
 	}
@@ -57,23 +76,6 @@ public class BoardService {
 		return dao.updateView(idx);
 	}
 
-	public Map<String, Object> getBoards(Map<String, Object> map,Integer reqPage) {
-		if(reqPage == null) {reqPage = 1;}
-		
-		Paging page = new Paging(reqPage, dao.searchedBoardCount(map));
-		
-		// 2. 페이지당 게시글 갯수와 페이지 시작 위치를 DB에 전달할 파라미터로 지정한다.
-		Map<String, Object> param = new HashMap<String, Object>();
-			
-		param.put("perCount", page.getPerCount());
-		param.put("offset", page.getOffset());
-				
-		// 3. 가져온 게시글 목록과 paging 결과를 Map에다 저장한다.
-		Map<String, Object> result = new HashMap<String, Object>();
-			
-		result.put("list", dao.selectSearch(map));
-		result.put("page", page);
-		return result;
-	}
+
 
 }

@@ -38,4 +38,8 @@ public class BoardService {
 		return dao.updateView(idx);
 	}
 
+	public List<BoardDTO> getBoards(Map<String, Object> map) {
+		return dao.selectSearch(map);
+	}
+
 }

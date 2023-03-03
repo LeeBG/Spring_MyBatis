@@ -8,5 +8,22 @@
 		where userid=#{userid} and userpw=#{userpw}
 	</select>
 
+	<insert id="join"
+	parameterType="com.itbank.model.AccountDTO">
+		insert into account(userid,userpw,nick,email,username)
+		 values(#{userid},#{userpw},#{nick},#{email},#{username})
+	</insert>
 	
+	<update id="update"
+	parameterType="com.itbank.model.AccountDTO">
+		update account 
+		set userid=#{userid}, userpw=#{userpw}, nick=#{nick}, email=#{email}, username=#{username} 
+		where idx=#{idx}
+	</update>
+	
+	<delete id="delete"
+	parameterType="int">
+		delete from account
+		where idx=#{idx} 
+	</delete>
 </mapper>

@@ -13,4 +13,17 @@
 		insert into account(userid,userpw,nick,email,username)  
 		values(#{userid},#{userpw},#{nick},#{email},#{username})
 	</insert>
+	
+	<update id="update"
+	parameterType="com.itbank.model.AccountDTO">
+		update account 
+		set userpw=#{userpw}, email=#{email}
+		where idx=#{idx}
+	</update>
+	
+	<delete id="delete"
+	parameterType="int">
+		delete from account
+		where idx=#{idx}	
+	</delete>
 </mapper>

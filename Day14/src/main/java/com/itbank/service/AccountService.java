@@ -23,4 +23,17 @@ public class AccountService {
 		return dao.login(user);
 	}
 	
+	public int join(AccountDTO user) {
+		return dao.join(user);
+	}
+
+	public int update(AccountDTO user) {
+		
+		return dao.update(user);
+	}
+
+	public int delete(int idx) {
+		return dao.delete(idx);
+	}
+	
 }
