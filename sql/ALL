@@ -1,0 +1,574 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-3월-06-2023   
+--------------------------------------------------------
+DROP SEQUENCE "ACCOUNT_SEQ";
+DROP SEQUENCE "BOARD_SEQ";
+DROP SEQUENCE "BOOK_SEQ";
+DROP TABLE "ACCOUNT" cascade constraints;
+DROP TABLE "BOARD" cascade constraints;
+DROP TABLE "BOOK" cascade constraints;
+--------------------------------------------------------
+--  DDL for Sequence ACCOUNT_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "ACCOUNT_SEQ"  MINVALUE 10000 MAXVALUE 9999999999999999999 INCREMENT BY 1 START WITH 10020 NOCACHE  NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence BOARD_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "BOARD_SEQ"  MINVALUE 10000 MAXVALUE 99999999999999999 INCREMENT BY 1 START WITH 10386 NOCACHE  NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Sequence BOOK_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "BOOK_SEQ"  MINVALUE 1000 MAXVALUE 99999999999999999999 INCREMENT BY 1 START WITH 1007 NOCACHE  NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+--------------------------------------------------------
+--  DDL for Table ACCOUNT
+--------------------------------------------------------
+
+  CREATE TABLE "ACCOUNT" 
+   (	"IDX" NUMBER DEFAULT "ACCOUNT_SEQ"."NEXTVAL", 
+	"USERID" VARCHAR2(20 BYTE), 
+	"USERPW" VARCHAR2(128 BYTE), 
+	"NICK" VARCHAR2(50 BYTE), 
+	"EMAIL" VARCHAR2(50 BYTE), 
+	"USERNAME" VARCHAR2(30 BYTE), 
+	"JOIN_DATE" DATE DEFAULT sysdate, 
+	"PROFILE" VARCHAR2(500 BYTE) DEFAULT 'E:\profile\default.png'
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table BOARD
+--------------------------------------------------------
+
+  CREATE TABLE "BOARD" 
+   (	"IDX" NUMBER DEFAULT "BOARD_SEQ"."NEXTVAL", 
+	"TITLE" VARCHAR2(100 BYTE), 
+	"CONTENTS" CLOB, 
+	"WRITER" VARCHAR2(50 BYTE), 
+	"WRITE_DATE" DATE DEFAULT sysdate, 
+	"VIEW_COUNT" NUMBER DEFAULT 0
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" 
+ LOB ("CONTENTS") STORE AS SECUREFILE (
+  TABLESPACE "USERS" ENABLE STORAGE IN ROW CHUNK 8192
+  NOCACHE LOGGING  NOCOMPRESS  KEEP_DUPLICATES 
+  STORAGE(INITIAL 106496 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)) ;
+--------------------------------------------------------
+--  DDL for Table BOOK
+--------------------------------------------------------
+
+  CREATE TABLE "BOOK" 
+   (	"IDX" NUMBER DEFAULT "BOOK_SEQ"."NEXTVAL", 
+	"TITLE" VARCHAR2(100 BYTE), 
+	"WRITER" VARCHAR2(50 BYTE), 
+	"PUBLISHER" VARCHAR2(50 BYTE), 
+	"PUBLISH_DATE" DATE DEFAULT sysdate, 
+	"PRICE" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+REM INSERTING into ACCOUNT
+SET DEFINE OFF;
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10000,'test1','1','테스트1','test1@naver.com','홍길동',to_date('23/02/23','RR/MM/DD'),'profile/test1/profile.png');
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10001,'itbank','it','아뱅','itbank@naver.com','김수현',to_date('23/02/23','RR/MM/DD'),'profile/default.png');
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10003,'spring','430','봄','spring@icloud.com','박진호',to_date('23/02/23','RR/MM/DD'),'profile/spring/profile.png');
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10004,'java','18','칩','java@naver.com','신수진',to_date('23/02/23','RR/MM/DD'),'profile/default.png');
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10016,'web1','1234','웹 테스트1','web1@naver.com','김호찬',to_date('23/03/03','RR/MM/DD'),'profile/default.png');
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10006,'Clang','2021','C언어','c@naver.com','이현민',to_date('23/02/24','RR/MM/DD'),'profile/default.png');
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10007,'python','561f1c8f7f2683e262e5fcb2cbd89975af588990e29adae0c056bd143d047eeffe207707c8c6fb642f70271079d7633a6520f07c61a17f4dd552981d148369db','파이썬','python@icloud.com','조세호',to_date('23/02/24','RR/MM/DD'),'profile/default.png');
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10005,'jsp','31','서블릿','jsp@gmail.com','김다현',to_date('23/02/24','RR/MM/DD'),'profile/default.png');
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10014,'hash1','98dbe70d830e76ac3eb548cf15ed68c86c37b2853df919b97afa447491f2a9ed656be530eae077ca5124ad1556125add0b09c9d5e8cf21709dda2e8bb8678260','해시 테스트1','hash1@icloud.com','박찬호',to_date('23/02/28','RR/MM/DD'),'profile/default.png');
+Insert into ACCOUNT (IDX,USERID,USERPW,NICK,EMAIL,USERNAME,JOIN_DATE,PROFILE) values (10015,'hash2','12b03226a6d8be9c6e8cd5e55dc6c7920caaa39df14aab92d5e3ea9340d1c8a4d3d0b8e4314f1f6ef131ba4bf1ceb9186ab87c801af0d5c95b1befb8cedae2b9','해시 테스트2','hash2@naver.com','홍진호',to_date('23/02/28','RR/MM/DD'),'profile/default.png');
+REM INSERTING into BOARD
+SET DEFINE OFF;
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10005,'웹 테스트','테스트1',to_date('23/02/20','RR/MM/DD'),35);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10285,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10286,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10287,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10288,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10289,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10290,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10291,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10292,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10293,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10294,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),2);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10295,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10296,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10297,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10298,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10299,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10300,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10301,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10302,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10303,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10304,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10305,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10306,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10307,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10308,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10309,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10310,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10311,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10312,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10313,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10314,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10315,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10316,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10317,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10318,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10319,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10320,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10321,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10322,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10323,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10324,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),2);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10325,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10326,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10327,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10328,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10329,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10330,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10331,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10332,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10333,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10334,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10335,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10336,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10337,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10338,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10339,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10340,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10341,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10342,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10343,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10344,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10345,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10346,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10347,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10348,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10349,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10350,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10351,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10352,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10353,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10354,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10007,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10008,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10009,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10010,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10011,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10012,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10013,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10014,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10015,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10016,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10017,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10018,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10019,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10020,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10021,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10022,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10023,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10024,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10025,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10026,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10027,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10028,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10029,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10030,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10031,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10032,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10033,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10034,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10035,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10036,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10037,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10038,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10039,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10040,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10041,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10042,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10043,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10044,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10045,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10046,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10047,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10048,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10049,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10050,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10051,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10052,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10053,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10054,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10055,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10056,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10057,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10058,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10059,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10060,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10061,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10062,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10063,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10064,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10065,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10066,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10067,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10068,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10069,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10070,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10071,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10072,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10073,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10074,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10075,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10076,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10077,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10000,'제목1','테스트1',to_date('23/02/16','RR/MM/DD'),6);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10078,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10079,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10080,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10081,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10082,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10083,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10084,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10085,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10086,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10087,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10088,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10089,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10090,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10091,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10092,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10093,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10094,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10095,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10096,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10097,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10098,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10099,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10100,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10101,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10102,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10103,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10104,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10105,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10106,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10107,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10108,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10109,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10110,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10111,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10112,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10113,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10114,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10115,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10116,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10117,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10118,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10119,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10120,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10121,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10122,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10123,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10124,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10125,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10126,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10127,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10128,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10129,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10130,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10131,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10132,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10133,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10134,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10135,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10136,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10137,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10138,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10139,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10140,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10141,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10142,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10143,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10144,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10145,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10146,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10147,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10001,'작성 테스트','아뱅',to_date('23/02/16','RR/MM/DD'),8);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10002,'안녕하세요','아뱅',to_date('23/02/16','RR/MM/DD'),13);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10148,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10004,'수정 테스트','아뱅',to_date('23/02/16','RR/MM/DD'),17);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10149,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10150,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10151,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10152,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10153,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10154,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10155,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10156,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10157,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10158,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10159,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10160,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10161,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10162,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10163,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10164,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10165,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10166,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10167,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10168,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10169,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10170,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10171,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10172,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10173,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10174,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10175,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10176,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10177,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10178,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10179,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10180,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10181,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10182,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10183,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10184,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10185,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10186,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10187,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10188,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10189,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10190,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10191,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10192,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10193,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10194,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10195,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10196,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10197,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10198,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10199,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10200,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10201,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10202,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10203,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10204,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10205,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10206,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10207,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10208,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10209,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10210,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10211,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10212,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10213,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10214,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10006,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),2);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10215,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10216,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10217,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10218,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10219,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10220,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10221,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10222,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10223,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10224,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10225,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10226,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10227,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10228,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10229,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10230,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10231,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10232,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10233,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10234,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10235,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10236,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10237,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10238,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10239,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10240,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10241,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10242,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10243,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10244,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10245,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10246,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10247,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10248,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10249,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10250,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10251,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10252,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10253,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10254,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10255,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10256,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10257,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10258,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10259,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10260,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10261,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10262,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10263,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10264,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10265,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10266,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10267,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10268,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10269,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10270,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10271,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10272,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10273,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10274,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10275,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10276,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10277,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10278,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10279,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10280,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10281,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10282,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10283,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10284,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10385,'mapper 테스트','마이바티스',to_date('23/02/22','RR/MM/DD'),6);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10355,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10356,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10357,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10358,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10359,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10360,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10361,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10362,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10363,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10364,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10365,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10366,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10367,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10368,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10369,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10370,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10371,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10372,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10373,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10374,'작성 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10375,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10376,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10377,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),0);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10378,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),1);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10379,'공지사항','관리자',to_date('23/02/21','RR/MM/DD'),2);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10380,'웹 테스트','테스트1',to_date('23/02/21','RR/MM/DD'),3);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10381,'수정 테스트','아뱅',to_date('23/02/21','RR/MM/DD'),2);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10382,'안녕하세요','아뱅',to_date('23/02/21','RR/MM/DD'),13);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10383,'mapper 수정 테스트','마이바티스',to_date('23/02/21','RR/MM/DD'),4);
+Insert into BOARD (IDX,TITLE,WRITER,WRITE_DATE,VIEW_COUNT) values (10384,'제목1','테스트1',to_date('23/02/21','RR/MM/DD'),2);
+REM INSERTING into BOOK
+SET DEFINE OFF;
+Insert into BOOK (IDX,TITLE,WRITER,PUBLISHER,PUBLISH_DATE,PRICE) values (1000,'세이노의 가르침','세이노','데이원',to_date('23/03/02','RR/MM/DD'),7200);
+Insert into BOOK (IDX,TITLE,WRITER,PUBLISHER,PUBLISH_DATE,PRICE) values (1001,'공생의 기술','이승헌','한문화',to_date('23/02/23','RR/MM/DD'),15000);
+Insert into BOOK (IDX,TITLE,WRITER,PUBLISHER,PUBLISH_DATE,PRICE) values (1002,'불편한 편의점2','김호연','나무옆의자',to_date('21/04/20','RR/MM/DD'),15000);
+--------------------------------------------------------
+--  DDL for Index ACCOUNT_IDX
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "ACCOUNT_IDX" ON "ACCOUNT" ("IDX") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index BOOK_PK_IDX
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "BOOK_PK_IDX" ON "BOOK" ("IDX") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index BOARD_IDX
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "BOARD_IDX" ON "BOARD" ("IDX") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table BOARD
+--------------------------------------------------------
+
+  ALTER TABLE "BOARD" MODIFY ("TITLE" NOT NULL ENABLE);
+  ALTER TABLE "BOARD" MODIFY ("CONTENTS" NOT NULL ENABLE);
+  ALTER TABLE "BOARD" MODIFY ("WRITER" NOT NULL ENABLE);
+  ALTER TABLE "BOARD" ADD CONSTRAINT "BOARD_IDX" PRIMARY KEY ("IDX")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table ACCOUNT
+--------------------------------------------------------
+
+  ALTER TABLE "ACCOUNT" MODIFY ("USERID" NOT NULL ENABLE);
+  ALTER TABLE "ACCOUNT" MODIFY ("USERPW" NOT NULL ENABLE);
+  ALTER TABLE "ACCOUNT" MODIFY ("NICK" NOT NULL ENABLE);
+  ALTER TABLE "ACCOUNT" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "ACCOUNT" MODIFY ("USERNAME" NOT NULL ENABLE);
+  ALTER TABLE "ACCOUNT" ADD CONSTRAINT "ACCOUNT_IDX" PRIMARY KEY ("IDX")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "ACCOUNT" ADD UNIQUE ("USERID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "ACCOUNT" ADD UNIQUE ("NICK")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table BOOK
+--------------------------------------------------------
+
+  ALTER TABLE "BOOK" MODIFY ("TITLE" NOT NULL ENABLE);
+  ALTER TABLE "BOOK" MODIFY ("WRITER" NOT NULL ENABLE);
+  ALTER TABLE "BOOK" MODIFY ("PUBLISHER" NOT NULL ENABLE);
+  ALTER TABLE "BOOK" MODIFY ("PRICE" NOT NULL ENABLE);
+  ALTER TABLE "BOOK" ADD CONSTRAINT "BOOK_PK_IDX" PRIMARY KEY ("IDX")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
